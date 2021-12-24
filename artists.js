@@ -51,4 +51,3 @@ module.exports.showArtist = async (req, res,) => {
       res.render('artists/show', { artist, guestSignups, guestAttends });
   }
   
- 
