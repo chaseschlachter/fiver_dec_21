@@ -40,3 +40,4 @@ const eventSchema = new Schema({
     required: [true, 'Date & time of event end required']
   },
 }, opts);
+
