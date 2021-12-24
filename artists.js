@@ -20,28 +20,28 @@ module.exports.showArtist = async (req, res,) => {
     			}
   		},
   		{
-  			$project: {
-	  			 _id: 1,
-		  		 name: 1,
-	  			 guests: 1,
-	  			totalGuests: { $cond: { if: { $isArray: "$guests" }, then: { $size: "$guests" }, else: "NA" } },
-		  		attendedGuests: {
-			  		$size: {
-				  		$filter: {
-					  		input: "$guests",
-						  	as: "guest",
-  							cond: {
-	  							$and: [{
-		  							$eq: ["$$guest.attended", "Y"]
-			  					}]
-				  			}
-					  	}
-  					}
-	  			}
-		  	}
-  		}
-	  ])
-  	if (eventData && Array.isArray(eventData) && eventData.length > 0) {
+  		$project: {
+	  		_id: 1,
+	  		name: 1,
+	  		guests: 1,
+	  		totalGuests: { $cond: { if: { $isArray: "$guests" }, then: { $size: "$guests" }, else: "NA" } },
+	  		attendedGuests: {
+			  	$size: {
+			  		$filter: {
+				  		input: "$guests",
+					  	as: "guest",
+  						cond: {
+	  						$and: [{
+		  						$eq: ["$$guest.attended", "Y"]
+			  				}]
+				  		}
+				  	}
+  				}
+	  		}
+	  	}
+  	}
+  	])
+       if (eventData && Array.isArray(eventData) && eventData.length > 0) {
 	  	totalGuests = eventData[0].totalGuests;
 		  attendedGuests = eventData[0].attendedGuests;
   	}
